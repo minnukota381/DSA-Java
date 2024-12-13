@@ -29,6 +29,11 @@ class Stack {
 		return top == -1;
 	}
 
+	public void display() {
+		for (int i = 0; i <= top; i++) {
+			System.out.println(arr[i]);
+		}
+	}
 }
 
 public class StackExampleUsingArray {
@@ -37,13 +42,15 @@ public class StackExampleUsingArray {
 		s.push(10);
 		s.push(100);
 		s.push(200);
-
-		s.peek();// 200
-		s.pop(); // 200
-		s.pop(); // 100
-		s.pop(); // 10
+//
+//		s.peek();// 200
+//		s.pop(); // 200
+//		s.pop(); // 100
+//		s.pop(); // 10
 
 		System.out.println(s.isEmpty());
+
+		s.display();
 
 	}
 }
