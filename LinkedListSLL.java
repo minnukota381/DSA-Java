@@ -23,11 +23,11 @@ class SinglyLinkedList {
             head = newNode;
             return;
         }
-        Node last = head;
-        while (last.next != null) {
-            last = last.next;
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
         }
-        last.next = newNode;
+        temp.next = newNode;
     }
 
     public void insertAtPosition(int data, int position) {
@@ -44,10 +44,6 @@ class SinglyLinkedList {
         Node temp = head;
         for (int i = 1; temp != null && i < position - 1; i++) {
             temp = temp.next;
-        }
-        if (temp == null) {
-            System.out.println("Position out of bounds");
-            return;
         }
         newNode.next = temp.next;
         temp.next = newNode;
