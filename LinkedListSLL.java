@@ -109,7 +109,9 @@ class SinglyLinkedList {
     }
 
     public void reverse() {
-        Node prev = null, current = head, next;
+        Node prev = null;
+        Node  current = head;
+        Node  next;
         while (current != null) {
             next = current.next;
             current.next = prev;
