@@ -1,5 +1,5 @@
 class Stack {
-	int arr[] = new int[5];
+	int [] arr = new int[5];
 	int top = -1;
 
 	public void push(int item) {
