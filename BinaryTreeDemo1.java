@@ -31,7 +31,7 @@ class BinaryTree {
         return newNode;
     }
 
-    public void preorder(Node root) {
+    public void preorder(Node root) { //Root-Left-Right
         if (root == null) {
             return;
         }
@@ -40,16 +40,16 @@ class BinaryTree {
         preorder(root.right);
     }
 
-    public void inorder(Node root) {
+    public void inorder(Node root) { //Left-Root-Right
         if (root == null) {
             return;
         }
-        inorder(root.left);
+        inorder(root.left); 
         System.out.print(root.data + " --> ");
         inorder(root.right);
     }
 
-    public void postorder(Node root) {
+    public void postorder(Node root) { 
         if (root == null) {
             return;
         }
