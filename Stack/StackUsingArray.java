@@ -1,3 +1,4 @@
+package Stack;
 class Stack {
 	int [] arr = new int[5];
 	int top = -1;

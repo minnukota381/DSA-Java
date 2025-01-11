@@ -1,3 +1,4 @@
+package Queue;
 class Queue {
 	private int[] arr = new int[5];
 	private int front = 0, rear = -1;

@@ -1,39 +1,38 @@
-class DoublyLinkedList {
-    Node head;
+package LinkedList;
+class CircularLinkedList {
+    Node last;
 
     class Node {
         int data;
         Node next;
-        Node prev;
 
         Node(int data) {
             this.data = data;
             this.next = null;
-            this.prev = null;
         }
     }
 
     public void insertAtBeginning(int data) {
         Node newNode = new Node(data);
-        if (head != null) {
-            newNode.next = head;
-            head.prev = newNode;
+        if (last == null) {
+            last = newNode;
+            last.next = last;
+        } else {
+            newNode.next = last.next;
+            last.next = newNode;
         }
-        head = newNode;
     }
 
     public void insertAtEnd(int data) {
         Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            return;
+        if (last == null) {
+            last = newNode;
+            last.next = last;
+        } else {
+            newNode.next = last.next;
+            last.next = newNode;
+            last = newNode;
         }
-        Node temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-        temp.next = newNode;
-        newNode.prev = temp;
     }
 
     public void insertAtPosition(int data, int position) {
@@ -42,131 +41,118 @@ class DoublyLinkedList {
             return;
         }
         Node newNode = new Node(data);
-        if (position == 1) {
-            newNode.next = head;
-            if (head != null) {
-                head.prev = newNode;
+        if (last == null) {
+            if (position == 1) {
+                last = newNode;
+                last.next = last;
+            } else {
+                System.out.println("Position out of bounds");
             }
-            head = newNode;
             return;
         }
-        Node temp = head;
-        for (int i = 1; temp != null && i < position - 1; i++) {
+        if (position == 1) {
+            newNode.next = last.next;
+            last.next = newNode;
+            return;
+        }
+        Node temp = last.next;
+        for (int i = 1; temp != last && i < position - 1; i++) {
             temp = temp.next;
         }
-        if (temp == null) {
+        if (temp == last && position - 1 > 1) {
             System.out.println("Position out of bounds");
             return;
         }
         newNode.next = temp.next;
-        if (temp.next != null) {
-            temp.next.prev = newNode;
-        }
         temp.next = newNode;
-        newNode.prev = temp;
+        if (temp == last) {
+            last = newNode;
+        }
     }
 
     public void deleteAtBeginning() {
-        if (head == null) {
+        if (last == null) {
             System.out.println("List is empty");
             return;
         }
-        head = head.next;
-        if (head != null) {
-            head.prev = null;
+        if (last.next == last) {
+            last = null;
+        } else {
+            last.next = last.next.next;
         }
     }
 
     public void deleteAtEnd() {
-        if (head == null) {
+        if (last == null) {
             System.out.println("List is empty");
             return;
         }
-        if (head.next == null) {
-            head = null;
-            return;
+        if (last.next == last) {
+            last = null;
+        } else {
+            Node temp = last.next;
+            while (temp.next != last) {
+                temp = temp.next;
+            }
+            temp.next = last.next;
+            last = temp;
         }
-        Node temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-        temp.prev.next = null;
     }
 
     public void deleteAtPosition(int position) {
-        if (position < 1) {
-            System.out.println("Invalid position");
+        if (last == null || position < 1) {
+            System.out.println("Invalid position or list is empty");
             return;
         }
         if (position == 1) {
-            if (head != null) {
-                head = head.next;
-                if (head != null) {
-                    head.prev = null;
-                }
-            } else {
-                System.out.println("List is empty");
-            }
+            deleteAtBeginning();
             return;
         }
-        Node temp = head;
-        for (int i = 1; temp != null && i < position; i++) {
+        Node temp = last.next;
+        for (int i = 1; temp.next != last.next && i < position - 1; i++) {
             temp = temp.next;
         }
-        if (temp == null) {
+        if (temp.next == last.next) {
             System.out.println("Position out of bounds");
             return;
         }
-        if (temp.next != null) {
-            temp.next.prev = temp.prev;
+        if (temp.next == last) {
+            last = temp;
         }
-        if (temp.prev != null) {
-            temp.prev.next = temp.next;
-        }
+        temp.next = temp.next.next;
     }
 
     public boolean search(int data) {
-        Node temp = head;
-        while (temp != null) {
+        if (last == null) {
+            return false;
+        }
+        Node temp = last.next;
+        do {
             if (temp.data == data) {
                 return true;
             }
             temp = temp.next;
-        }
+        } while (temp != last.next);
         return false;
     }
 
-    public void reverse() {
-        Node temp = null;
-        Node current = head;
-        while (current != null) {
-            temp = current.prev;
-            current.prev = current.next;
-            current.next = temp;
-            current = current.prev;
-        }
-        if (temp != null) {
-            head = temp.prev;
-        }
-    }
-
     public void printList() {
-        if (head == null) {
+        if (last == null) {
             System.out.println("List is empty");
             return;
         }
-        Node temp = head;
-        while (temp != null) {
+        Node temp = last.next;
+        do {
             System.out.print(temp.data + " ");
             temp = temp.next;
-        }
+        } while (temp != last.next);
         System.out.println();
     }
 }
 
-public class LinkedListDLL {
+public class LinkedListCLL {
     public static void main(String[] args) {
-        DoublyLinkedList list = new DoublyLinkedList();
+        CircularLinkedList list = new CircularLinkedList();
 
         list.insertAtBeginning(10);
         list.insertAtBeginning(5);
@@ -191,9 +177,5 @@ public class LinkedListDLL {
 
         System.out.println("Is 20 in the list? " + list.search(20));
         System.out.println("Is 25 in the list? " + list.search(25));
-
-        list.reverse();
-        System.out.print("Reversed list: ");
-        list.printList();
     }
 }
