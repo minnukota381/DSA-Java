@@ -1,3 +1,4 @@
+package Trees;
 class BinaryTree {
     Node root;
 
