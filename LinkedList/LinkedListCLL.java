@@ -31,7 +31,7 @@ class CircularLinkedList {
         } else {
             newNode.next = head.next;
             head.next = newNode;
-            head = newNode;  // head now points to the last node
+            head = newNode; 
         }
     }
 
