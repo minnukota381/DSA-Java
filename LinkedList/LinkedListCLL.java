@@ -1,6 +1,6 @@
 package LinkedList;
 class CircularLinkedList {
-    Node head;
+    Node last;
 
     class Node {
         int data;
@@ -14,24 +14,24 @@ class CircularLinkedList {
 
     public void insertAtBeginning(int data) {
         Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            head.next = head;
+        if (last == null) {
+            last = newNode;
+            last.next = last;
         } else {
-            newNode.next = head.next;
-            head.next = newNode;
+            newNode.next = last.next;
+            last.next = newNode;
         }
     }
 
     public void insertAtEnd(int data) {
         Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            head.next = head;
+        if (last == null) {
+            last = newNode;
+            last.next = last;
         } else {
-            newNode.next = head.next;
-            head.next = newNode;
-            head = newNode; 
+            newNode.next = last.next;
+            last.next = newNode;
+            last = newNode;
         }
     }
 
@@ -41,66 +41,66 @@ class CircularLinkedList {
             return;
         }
         Node newNode = new Node(data);
-        if (head == null) {
+        if (last == null) {
             if (position == 1) {
-                head = newNode;
-                head.next = head;
+                last = newNode;
+                last.next = last;
             } else {
                 System.out.println("Position out of bounds");
             }
             return;
         }
         if (position == 1) {
-            newNode.next = head.next;
-            head.next = newNode;
+            newNode.next = last.next;
+            last.next = newNode;
             return;
         }
-        Node temp = head.next;
-        for (int i = 1; temp != head && i < position - 1; i++) {
+        Node temp = last.next;
+        for (int i = 1; temp != last && i < position - 1; i++) {
             temp = temp.next;
         }
-        if (temp == head && position - 1 > 1) {
+        if (temp == last && position - 1 > 1) {
             System.out.println("Position out of bounds");
             return;
         }
         newNode.next = temp.next;
         temp.next = newNode;
-        if (temp == head) {
-            head = newNode;
+        if (temp == last) {
+            last = newNode;
         }
     }
 
     public void deleteAtBeginning() {
-        if (head == null) {
+        if (last == null) {
             System.out.println("List is empty");
             return;
         }
-        if (head.next == head) {
-            head = null;
+        if (last.next == last) {
+            last = null;
         } else {
-            head.next = head.next.next;
+            last.next = last.next.next;
         }
     }
 
     public void deleteAtEnd() {
-        if (head == null) {
+        if (last == null) {
             System.out.println("List is empty");
             return;
         }
-        if (head.next == head) {
-            head = null;
+        if (last.next == last) {
+            last = null;
         } else {
-            Node temp = head.next;
-            while (temp.next != head) {
+            Node temp = last.next;
+            while (temp.next != last) {
                 temp = temp.next;
             }
-            temp.next = head.next;
-            head = temp;
+            temp.next = last.next;
+            last = temp;
         }
     }
 
     public void deleteAtPosition(int position) {
-        if (head == null || position < 1) {
+        if (last == null || position < 1) {
             System.out.println("Invalid position or list is empty");
             return;
         }
@@ -108,44 +108,44 @@ class CircularLinkedList {
             deleteAtBeginning();
             return;
         }
-        Node temp = head.next;
-        for (int i = 1; temp.next != head.next && i < position - 1; i++) {
+        Node temp = last.next;
+        for (int i = 1; temp.next != last.next && i < position - 1; i++) {
             temp = temp.next;
         }
-        if (temp.next == head.next) {
+        if (temp.next == last.next) {
             System.out.println("Position out of bounds");
             return;
         }
-        if (temp.next == head) {
-            head = temp;
+        if (temp.next == last) {
+            last = temp;
         }
         temp.next = temp.next.next;
     }
 
     public boolean search(int data) {
-        if (head == null) {
+        if (last == null) {
             return false;
         }
-        Node temp = head.next;
+        Node temp = last.next;
         do {
             if (temp.data == data) {
                 return true;
             }
             temp = temp.next;
-        } while (temp != head.next);
+        } while (temp != last.next);
         return false;
     }
 
     public void printList() {
-        if (head == null) {
+        if (last == null) {
             System.out.println("List is empty");
             return;
         }
-        Node temp = head.next;
+        Node temp = last.next;
         do {
             System.out.print(temp.data + " ");
             temp = temp.next;
-        } while (temp != head.next);
+        } while (temp != last.next);
         System.out.println();
     }
 }
