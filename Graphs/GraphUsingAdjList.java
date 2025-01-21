@@ -3,8 +3,8 @@ package Graphs;
 import java.util.*;
 
 class GraphList {
-    private int vertices; // Number of vertices
-    private List<List<Integer>> adjList; // Adjacency list
+    private int vertices;
+    private List<List<Integer>> adjList;
 
     public GraphList(int vertices) {
         this.vertices = vertices;
