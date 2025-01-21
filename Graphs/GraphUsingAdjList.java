@@ -8,15 +8,15 @@ class GraphList {
 
     public GraphList(int vertices) {
         this.vertices = vertices;
-        adjList = new ArrayList<>(); // Initialize the adjacency list
+        adjList = new ArrayList<>();
         for (int i = 0; i < vertices; i++) {
-            adjList.add(new ArrayList<>()); // Add an empty list for each vertex
+            adjList.add(new ArrayList<>()); 
         }
     }
 
     public void addEdge(int u, int v) {
-        adjList.get(u).add(v); // Add v to u's list
-        adjList.get(v).add(u); // For undirected graph, add u to v's list
+        adjList.get(u).add(v);
+        adjList.get(v).add(u);
     }
 
     public void printAdjList() {
