@@ -1,4 +1,4 @@
-*# DSA JAVA Repository
+# DSA JAVA Repository
 
 ## Overview
 This repository provides Java implementations of essential **Data Structures and Algorithms (DSA)**. Each topic is categorized for ease of navigation and includes practical examples, making it a great resource for learning and applying DSA concepts.
