@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class LinearSearch {
     public static int linearSearch(int[] arr, int target) {
-        for (int i = 0; i < arr.length; i++) {
+        int n = arr.length;
+        for (int i = 0; i < n; i++) {
             if (arr[i] == target) {
                 return i;
             }
@@ -15,11 +16,11 @@ public class LinearSearch {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter the size of the array: ");
-        int size = scanner.nextInt();
+        int n = scanner.nextInt();
 
-        int[] arr = new int[size];
+        int[] arr = new int[n];
         System.out.println("Enter the elements of the array:");
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < n; i++) {
             arr[i] = scanner.nextInt();
         }
 
