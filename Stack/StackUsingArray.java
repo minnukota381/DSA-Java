@@ -28,6 +28,10 @@ class Stack {
 		return top == -1;
 	}
 
+	public boolean isFull() {
+		return top == arr.length - 1;
+	}
+
 	public void display() {
 		for (int i = 0; i <= top; i++) {
 			System.out.println(arr[i]);
